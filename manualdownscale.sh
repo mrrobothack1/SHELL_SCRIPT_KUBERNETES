@@ -64,8 +64,8 @@ while [[ $isDownScale = true ]]; do
   #downScale k8s_context threshold namespace hpa_name min_pods max_pods target_cpu
 #  downScale $mtn_context $mtn_threshold browse-perf browse-75-1 5 10 45
 #  downScale $mtn_egproxy_context $egress_threshold egproxy-perf egproxy-10 15 40 60
-  downScale $mtn_context $mtn_threshold browse-perf browse-75-1 26 40 45
-  downScale $mtn_egproxy_context $egress_threshold egproxy-perf egproxy-10 30 120 60
+  downScale $mtn_context $mtn_threshold b-perf browse-75-1 26 40 45
+  downScale $mtn_egproxy_context $egress_threshold proxy-perf proxy-10 30 120 60
 
 
   if [[ $isDownScale == true ]]; then
@@ -79,7 +79,7 @@ if [[ ${mtn} == "true" ]]; then
   kubectl --context=$mtn_proxy_context get hpa --all-namespaces | grep -v unknown
 fi
 
-if [[ ${wallet} == "true" ]]; then
+if [[ ${w} == "true" ]]; then
   kubectl --context=$w_context get hpa --all-namespaces | grep -v unknown
   kubectl --context=$kp_proxy_context get hpa --all-namespaces | grep -v unknown
 fi
