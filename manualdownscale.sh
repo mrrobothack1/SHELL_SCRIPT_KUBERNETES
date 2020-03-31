@@ -34,16 +34,16 @@ function downScale() {
 if [[ ${zone} == "central" ]]; then
 
   mtn_context="gke_Soju-project_us-central1-Soju--prd-usc1-1"
-  mtn_egproxy_context="gke_Soju-project_us-central1-Soju--egproxy-prd-usc1-1"
-  kp_egproxy_context="gke_Soju-project_us-central1-b_k-egproxy-prd-usc1-1"
-  wallet_context="gke_Soju-project_us-central1-b_wservices-prd-usc1-1"
+  mtn_proxy_context="gke_Soju-project_us-central1-Soju--proxy-prd-usc1-1"
+  k_proxy_context="gke_Soju-project_us-central1-b_k-proxy-prd-usc1-1"
+  w_context="gke_Soju-project_us-central1-b_w-prd-usc1-1"
 
 elif [[ ${zone} == "east" ]]; then
 
   mtn_context="gke_Soju-project_us-east1-Soju--prd-use1-1"
-  mtn_egproxy_context="gke_Soju-project_us-east1-Soju--egproxy-prd-use1-1"
-  kp_egproxy_context="gke_Soju-project_us-east1-b_k-egproxy-prd-use1-1"
-  wallet_context="gke_Soju-project_us-east1-b_wservices-prd-use1-1"
+  mtn_proxy_context="gke_Soju-project_us-east1-Soju--proxy-prd-use1-1"
+  kp_groxy_context="gke_Soju-project_us-east1-b_k-proxy-prd-use1-1"
+  w_context="gke_Soju-project_us-east1-b_w===-prd-use1-1"
 
 fi
 
@@ -51,7 +51,7 @@ fi
 mtn_threshold=5
 egress_threshold=5
 ingress_threshold=5
-wallet_threshold=5
+w_threshold=5
 
 isDownScale=true
 
@@ -76,10 +76,10 @@ done
 #based on
 if [[ ${mtn} == "true" ]]; then
   kubectl --context=$mtn_context get hpa --all-namespaces | grep -v unknown
-  kubectl --context=$mtn_egproxy_context get hpa --all-namespaces | grep -v unknown
+  kubectl --context=$mtn_proxy_context get hpa --all-namespaces | grep -v unknown
 fi
 
 if [[ ${wallet} == "true" ]]; then
-  kubectl --context=$wallet_context get hpa --all-namespaces | grep -v unknown
-  kubectl --context=$kp_egproxy_context get hpa --all-namespaces | grep -v unknown
+  kubectl --context=$w_context get hpa --all-namespaces | grep -v unknown
+  kubectl --context=$kp_proxy_context get hpa --all-namespaces | grep -v unknown
 fi
