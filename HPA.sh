@@ -18,7 +18,7 @@ elif [[ ${zone} == "east" ]]; then
   mtn_proxy_context="gke_soju-projectus-east1-b_soju-proxy-prd-use1-1"
   k_proxy_context="gke_soju-projectus-east1-b_kpservices-proxy-prd-use1-1"
 
-  encryption_hpa="encryption-34-3"
+  e_hpa="encryption-34-3"
 
 fi
 
@@ -56,17 +56,17 @@ if [[ ${mtn} == "true" ]]; then
   kubectl --context=$mtn_context -n -prod patch hpa r-60-161693c-1 --patch '{"spec":{"targetCPUUtilizationPercentage":45,"minReplicas":2,"maxReplicas":10}}'
 
 
-  #egproxy hpa changes
-  kubectl --context=$mtn_egproxy_context -n egproxy-prod patch hpa -8 --patch '{"spec":{"targetCPUUtilizationPercentage":60,"minReplicas":60,"maxReplicas":240}}'
+  #proxy hpa changes
+  kubectl --context=$mtn_egproxy_context -n proxy-prod patch hpa -8 --patch '{"spec":{"targetCPUUtilizationPercentage":60,"minReplicas":60,"maxReplicas":240}}'
 fi
 
-if [[ ${wallet} == "true" ]]; then
+if [[ ${w} == "true" ]]; then
 
 kubectl --context=$w_context -n prod patch hpa -6 --patch '{"spec":{"targetCPUUtilizationPercentage":60,"minReplicas":4,"maxReplicas":20}}'
 
 kubectl --context=$w_context -n prod patch hpa -103 --patch '{"spec":{"targetCPUUtilizationPercentage":45,"minReplicas":2,"maxReplicas":40}}'
 
-#egproxy hpa changes
+#proxy hpa changes
 
 kubectl --context=$proxy_context -n proxy-prod patch hpa -11 --patch '{"spec":{"targetCPUUtilizationPercentage":60,"minReplicas":4,"maxReplicas":15}}'
 
