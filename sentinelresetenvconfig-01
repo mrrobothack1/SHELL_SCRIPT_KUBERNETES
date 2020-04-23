@@ -1,0 +1,3 @@
+sentinel-service=redis-sentinel
+namespace=plt-redis
+spring.redis.sentinel.master=mymaster

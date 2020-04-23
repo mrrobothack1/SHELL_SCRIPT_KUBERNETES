@@ -1,0 +1,5 @@
+sentinel monitor mymaster %master-ip% 6379 2
+sentinel down-after-milliseconds mymaster 30000
+sentinel failover-timeout mymaster 30000
+sentinel parallel-syncs mymaster 1
+bind 0.0.0.0

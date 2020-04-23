@@ -1,0 +1,84 @@
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: plt-redis
+spec:
+  replicas: 4
+  selector:
+    name: redis
+  template:
+    metadata:
+      labels:
+        name: redis
+        role: master
+    spec:
+      containers:
+      - name: redis
+        image: us.gcr.io/soju-mobile-hle/redis:master33
+        livenessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - redis-cli -h $(hostname) ping
+          failureThreshold: 3
+          initialDelaySeconds: 30
+          periodSeconds: 5
+          successThreshold: 1
+          timeoutSeconds: 1
+        readinessProbe:
+          exec:
+            command:
+            - sh
+            - -c
+            - redis-cli -h $(hostname) ping
+          failureThreshold: 3
+          initialDelaySeconds: 15
+          periodSeconds: 10
+          successThreshold: 1
+          timeoutSeconds: 10
+        ports:
+        - containerPort: 6379
+        resources:
+          limits:
+            cpu: "1"
+            memory: "4096M"
+          requests:
+            cpu: "1"
+            memory: "4096M"
+        volumeMounts:
+        - name: data
+          mountPath: /redis-master-data
+        - name: master-config
+          mountPath: /master
+        - name: slave-config
+          mountPath: /slave
+        command: ["/bin/sh"]
+        args: ["-c", "/run.sh"]
+      initContainers:
+      - name: config-data
+        image: us.gcr.io/soju-mobile-hle/redis:master33
+        command: ["/bin/echo"]
+        args: ["Volume mounted"]
+        volumeMounts:
+        - name: data
+          mountPath: /redis-master-data
+        - name: master-config
+          mountPath: /master
+        - name: slave-config
+          mountPath: /slave
+      volumes:
+      - name: data
+        emptyDir: {}
+      - name: master-config
+        configMap:
+          name: redis-master-config
+          items:
+          - key: redis-master-config
+            path: redis.conf
+      - name: slave-config
+        configMap:
+          name: redis-slave-config
+          items:
+          - key: redis-slave-config
+            path: redis.conf

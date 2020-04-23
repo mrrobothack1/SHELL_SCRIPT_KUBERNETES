@@ -1,0 +1,51 @@
+--- 
+apiVersion: apps/v1
+kind: Deployment
+metadata: 
+  name: redis-deployment
+spec: 
+  replicas: 1
+  selector: 
+    matchLabels: 
+      name: redis
+      redis-sentinel: "true"
+      role: master
+  template: 
+    metadata: 
+      labels: 
+        name: redis
+        redis-sentinel: "true"
+        role: master
+    spec: 
+      containers: 
+        - 
+          env: 
+            - 
+              name: MASTER
+              value: "true"
+          image: "us.gcr.io/soju-mobile-hle/redis:master33"
+          name: master
+          ports: 
+            - 
+              containerPort: 6379
+          resources: 
+            limits: 
+              cpu: "0.1"
+          volumeMounts: 
+            - 
+              mountPath: /redis-master-data
+              name: data
+        - 
+          env: 
+            - 
+              name: SENTINEL
+              value: "true"
+          image: "us.gcr.io/soju-mobile-hle/redis:master33"
+          name: sentinel
+          ports: 
+            - 
+              containerPort: 26379
+      volumes: 
+        - 
+          emptyDir: {}
+          name: data
