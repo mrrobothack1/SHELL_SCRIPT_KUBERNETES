@@ -1,0 +1,798 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes"?>
+<template encoding-version="1.3">
+    <description></description>
+    <groupId>5dd46ce8-0171-1000-f466-c5943b9e2fce</groupId>
+    <name>detect-duplicates</name>
+    <snippet>
+        <connections>
+            <id>3215d5ee-064d-3fcd-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>d507cdf9-f5da-3275-0000-000000000000</groupId>
+                <id>179505a9-a163-3aa5-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>success</selectedRelationships>
+            <source>
+                <groupId>d507cdf9-f5da-3275-0000-000000000000</groupId>
+                <id>832c0a49-d9eb-344b-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
+            <id>6376df7f-6e96-3cb2-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>d507cdf9-f5da-3275-0000-000000000000</groupId>
+                <id>3acce02e-1e6a-3d4e-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>non-duplicate</selectedRelationships>
+            <source>
+                <groupId>d507cdf9-f5da-3275-0000-000000000000</groupId>
+                <id>179505a9-a163-3aa5-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <connections>
+            <id>74389036-b441-3e1e-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <backPressureDataSizeThreshold>1 GB</backPressureDataSizeThreshold>
+            <backPressureObjectThreshold>10000</backPressureObjectThreshold>
+            <destination>
+                <groupId>d507cdf9-f5da-3275-0000-000000000000</groupId>
+                <id>a226dfc7-0bb2-3235-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </destination>
+            <flowFileExpiration>0 sec</flowFileExpiration>
+            <labelIndex>1</labelIndex>
+            <loadBalanceCompression>DO_NOT_COMPRESS</loadBalanceCompression>
+            <loadBalancePartitionAttribute></loadBalancePartitionAttribute>
+            <loadBalanceStatus>LOAD_BALANCE_NOT_CONFIGURED</loadBalanceStatus>
+            <loadBalanceStrategy>DO_NOT_LOAD_BALANCE</loadBalanceStrategy>
+            <name></name>
+            <selectedRelationships>duplicate</selectedRelationships>
+            <selectedRelationships>failure</selectedRelationships>
+            <source>
+                <groupId>d507cdf9-f5da-3275-0000-000000000000</groupId>
+                <id>179505a9-a163-3aa5-0000-000000000000</id>
+                <type>PROCESSOR</type>
+            </source>
+            <zIndex>0</zIndex>
+        </connections>
+        <controllerServices>
+            <id>27087c5e-d316-3ce2-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-redis-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.11.4</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>Redis Mode</key>
+                    <value>
+                        <name>Redis Mode</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Connection String</key>
+                    <value>
+                        <name>Connection String</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Database Index</key>
+                    <value>
+                        <name>Database Index</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Communication Timeout</key>
+                    <value>
+                        <name>Communication Timeout</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Cluster Max Redirects</key>
+                    <value>
+                        <name>Cluster Max Redirects</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Sentinel Master</key>
+                    <value>
+                        <name>Sentinel Master</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Password</key>
+                    <value>
+                        <name>Password</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Max Total</key>
+                    <value>
+                        <name>Pool - Max Total</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Max Idle</key>
+                    <value>
+                        <name>Pool - Max Idle</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Min Idle</key>
+                    <value>
+                        <name>Pool - Min Idle</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Block When Exhausted</key>
+                    <value>
+                        <name>Pool - Block When Exhausted</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Max Wait Time</key>
+                    <value>
+                        <name>Pool - Max Wait Time</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Min Evictable Idle Time</key>
+                    <value>
+                        <name>Pool - Min Evictable Idle Time</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Time Between Eviction Runs</key>
+                    <value>
+                        <name>Pool - Time Between Eviction Runs</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Num Tests Per Eviction Run</key>
+                    <value>
+                        <name>Pool - Num Tests Per Eviction Run</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Test On Create</key>
+                    <value>
+                        <name>Pool - Test On Create</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Test On Borrow</key>
+                    <value>
+                        <name>Pool - Test On Borrow</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Test On Return</key>
+                    <value>
+                        <name>Pool - Test On Return</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>Pool - Test While Idle</key>
+                    <value>
+                        <name>Pool - Test While Idle</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>RedisConnectionPoolService</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>Redis Mode</key>
+                </entry>
+                <entry>
+                    <key>Connection String</key>
+                    <value>localhost:6379</value>
+                </entry>
+                <entry>
+                    <key>Database Index</key>
+                </entry>
+                <entry>
+                    <key>Communication Timeout</key>
+                </entry>
+                <entry>
+                    <key>Cluster Max Redirects</key>
+                </entry>
+                <entry>
+                    <key>Sentinel Master</key>
+                </entry>
+                <entry>
+                    <key>Password</key>
+                </entry>
+                <entry>
+                    <key>Pool - Max Total</key>
+                </entry>
+                <entry>
+                    <key>Pool - Max Idle</key>
+                </entry>
+                <entry>
+                    <key>Pool - Min Idle</key>
+                </entry>
+                <entry>
+                    <key>Pool - Block When Exhausted</key>
+                </entry>
+                <entry>
+                    <key>Pool - Max Wait Time</key>
+                </entry>
+                <entry>
+                    <key>Pool - Min Evictable Idle Time</key>
+                </entry>
+                <entry>
+                    <key>Pool - Time Between Eviction Runs</key>
+                </entry>
+                <entry>
+                    <key>Pool - Num Tests Per Eviction Run</key>
+                </entry>
+                <entry>
+                    <key>Pool - Test On Create</key>
+                </entry>
+                <entry>
+                    <key>Pool - Test On Borrow</key>
+                </entry>
+                <entry>
+                    <key>Pool - Test On Return</key>
+                </entry>
+                <entry>
+                    <key>Pool - Test While Idle</key>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>org.apache.nifi.redis.service.RedisConnectionPoolService</type>
+        </controllerServices>
+        <controllerServices>
+            <id>a9db291a-7b46-34df-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <bundle>
+                <artifact>nifi-redis-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.11.4</version>
+            </bundle>
+            <comments></comments>
+            <descriptors>
+                <entry>
+                    <key>redis-connection-pool</key>
+                    <value>
+                        <identifiesControllerService>org.apache.nifi.redis.RedisConnectionPool</identifiesControllerService>
+                        <name>redis-connection-pool</name>
+                    </value>
+                </entry>
+                <entry>
+                    <key>redis-cache-ttl</key>
+                    <value>
+                        <name>redis-cache-ttl</name>
+                    </value>
+                </entry>
+            </descriptors>
+            <name>RedisDistributedMapCacheClientService</name>
+            <persistsState>false</persistsState>
+            <properties>
+                <entry>
+                    <key>redis-connection-pool</key>
+                    <value>27087c5e-d316-3ce2-0000-000000000000</value>
+                </entry>
+                <entry>
+                    <key>redis-cache-ttl</key>
+                </entry>
+            </properties>
+            <state>ENABLED</state>
+            <type>org.apache.nifi.redis.service.RedisDistributedMapCacheClientService</type>
+        </controllerServices>
+        <processors>
+            <id>179505a9-a163-3aa5-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <position>
+                <x>208.0</x>
+                <y>192.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.11.4</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Cache Entry Identifier</key>
+                        <value>
+                            <name>Cache Entry Identifier</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>FlowFile Description</key>
+                        <value>
+                            <name>FlowFile Description</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Age Off Duration</key>
+                        <value>
+                            <name>Age Off Duration</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Distributed Cache Service</key>
+                        <value>
+                            <identifiesControllerService>org.apache.nifi.distributed.cache.client.DistributedMapCacheClient</identifiesControllerService>
+                            <name>Distributed Cache Service</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Cache The Entry Identifier</key>
+                        <value>
+                            <name>Cache The Entry Identifier</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Cache Entry Identifier</key>
+                        <value>${filename}</value>
+                    </entry>
+                    <entry>
+                        <key>FlowFile Description</key>
+                        <value></value>
+                    </entry>
+                    <entry>
+                        <key>Age Off Duration</key>
+                    </entry>
+                    <entry>
+                        <key>Distributed Cache Service</key>
+                        <value>a9db291a-7b46-34df-0000-000000000000</value>
+                    </entry>
+                    <entry>
+                        <key>Cache The Entry Identifier</key>
+                        <value>true</value>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>DetectDuplicate</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>duplicate</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>non-duplicate</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.DetectDuplicate</type>
+        </processors>
+        <processors>
+            <id>3acce02e-1e6a-3d4e-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <position>
+                <x>0.0</x>
+                <y>408.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.11.4</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Directory</key>
+                        <value>
+                            <name>Directory</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Conflict Resolution Strategy</key>
+                        <value>
+                            <name>Conflict Resolution Strategy</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Create Missing Directories</key>
+                        <value>
+                            <name>Create Missing Directories</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Count</key>
+                        <value>
+                            <name>Maximum File Count</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Last Modified Time</key>
+                        <value>
+                            <name>Last Modified Time</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Permissions</key>
+                        <value>
+                            <name>Permissions</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Owner</key>
+                        <value>
+                            <name>Owner</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Group</key>
+                        <value>
+                            <name>Group</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Directory</key>
+                        <value>/Users/rohith/temp/non-duplicate-files/</value>
+                    </entry>
+                    <entry>
+                        <key>Conflict Resolution Strategy</key>
+                        <value>fail</value>
+                    </entry>
+                    <entry>
+                        <key>Create Missing Directories</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Count</key>
+                    </entry>
+                    <entry>
+                        <key>Last Modified Time</key>
+                    </entry>
+                    <entry>
+                        <key>Permissions</key>
+                    </entry>
+                    <entry>
+                        <key>Owner</key>
+                    </entry>
+                    <entry>
+                        <key>Group</key>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>PutFile</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.PutFile</type>
+        </processors>
+        <processors>
+            <id>832c0a49-d9eb-344b-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <position>
+                <x>200.0</x>
+                <y>0.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.11.4</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Input Directory</key>
+                        <value>
+                            <name>Input Directory</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>File Filter</key>
+                        <value>
+                            <name>File Filter</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Path Filter</key>
+                        <value>
+                            <name>Path Filter</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Batch Size</key>
+                        <value>
+                            <name>Batch Size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Keep Source File</key>
+                        <value>
+                            <name>Keep Source File</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Recurse Subdirectories</key>
+                        <value>
+                            <name>Recurse Subdirectories</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Polling Interval</key>
+                        <value>
+                            <name>Polling Interval</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Ignore Hidden Files</key>
+                        <value>
+                            <name>Ignore Hidden Files</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Minimum File Age</key>
+                        <value>
+                            <name>Minimum File Age</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Age</key>
+                        <value>
+                            <name>Maximum File Age</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Minimum File Size</key>
+                        <value>
+                            <name>Minimum File Size</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Size</key>
+                        <value>
+                            <name>Maximum File Size</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Input Directory</key>
+                        <value>/Users/rohith/temp/test-duplicate/</value>
+                    </entry>
+                    <entry>
+                        <key>File Filter</key>
+                        <value>[^\.].*</value>
+                    </entry>
+                    <entry>
+                        <key>Path Filter</key>
+                    </entry>
+                    <entry>
+                        <key>Batch Size</key>
+                        <value>10</value>
+                    </entry>
+                    <entry>
+                        <key>Keep Source File</key>
+                        <value>false</value>
+                    </entry>
+                    <entry>
+                        <key>Recurse Subdirectories</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>Polling Interval</key>
+                        <value>0 sec</value>
+                    </entry>
+                    <entry>
+                        <key>Ignore Hidden Files</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>Minimum File Age</key>
+                        <value>0 sec</value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Age</key>
+                    </entry>
+                    <entry>
+                        <key>Minimum File Size</key>
+                        <value>0 B</value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Size</key>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>GetFile</name>
+            <relationships>
+                <autoTerminate>false</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.GetFile</type>
+        </processors>
+        <processors>
+            <id>a226dfc7-0bb2-3235-0000-000000000000</id>
+            <parentGroupId>d507cdf9-f5da-3275-0000-000000000000</parentGroupId>
+            <position>
+                <x>480.0</x>
+                <y>408.0</y>
+            </position>
+            <bundle>
+                <artifact>nifi-standard-nar</artifact>
+                <group>org.apache.nifi</group>
+                <version>1.11.4</version>
+            </bundle>
+            <config>
+                <bulletinLevel>WARN</bulletinLevel>
+                <comments></comments>
+                <concurrentlySchedulableTaskCount>1</concurrentlySchedulableTaskCount>
+                <descriptors>
+                    <entry>
+                        <key>Directory</key>
+                        <value>
+                            <name>Directory</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Conflict Resolution Strategy</key>
+                        <value>
+                            <name>Conflict Resolution Strategy</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Create Missing Directories</key>
+                        <value>
+                            <name>Create Missing Directories</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Count</key>
+                        <value>
+                            <name>Maximum File Count</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Last Modified Time</key>
+                        <value>
+                            <name>Last Modified Time</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Permissions</key>
+                        <value>
+                            <name>Permissions</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Owner</key>
+                        <value>
+                            <name>Owner</name>
+                        </value>
+                    </entry>
+                    <entry>
+                        <key>Group</key>
+                        <value>
+                            <name>Group</name>
+                        </value>
+                    </entry>
+                </descriptors>
+                <executionNode>ALL</executionNode>
+                <lossTolerant>false</lossTolerant>
+                <penaltyDuration>30 sec</penaltyDuration>
+                <properties>
+                    <entry>
+                        <key>Directory</key>
+                        <value>/Users/rohith/temp/duplicate-files/</value>
+                    </entry>
+                    <entry>
+                        <key>Conflict Resolution Strategy</key>
+                        <value>fail</value>
+                    </entry>
+                    <entry>
+                        <key>Create Missing Directories</key>
+                        <value>true</value>
+                    </entry>
+                    <entry>
+                        <key>Maximum File Count</key>
+                    </entry>
+                    <entry>
+                        <key>Last Modified Time</key>
+                    </entry>
+                    <entry>
+                        <key>Permissions</key>
+                    </entry>
+                    <entry>
+                        <key>Owner</key>
+                    </entry>
+                    <entry>
+                        <key>Group</key>
+                    </entry>
+                </properties>
+                <runDurationMillis>0</runDurationMillis>
+                <schedulingPeriod>0 sec</schedulingPeriod>
+                <schedulingStrategy>TIMER_DRIVEN</schedulingStrategy>
+                <yieldDuration>1 sec</yieldDuration>
+            </config>
+            <executionNodeRestricted>false</executionNodeRestricted>
+            <name>PutFile</name>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>failure</name>
+            </relationships>
+            <relationships>
+                <autoTerminate>true</autoTerminate>
+                <name>success</name>
+            </relationships>
+            <state>STOPPED</state>
+            <style/>
+            <type>org.apache.nifi.processors.standard.PutFile</type>
+        </processors>
+    </snippet>
+    <timestamp>04/12/2020 16:40:44 IST</timestamp>
+</template>
