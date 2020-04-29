@@ -1,0 +1,336 @@
+$0  The filename of the current script.
+$n  These variables correspond to the arguments with which a script was invoked. Here n is a positive decimal number corresponding to the position of an argument (the first argument is $1, the second argument is $2, and so on).
+$#  The number of arguments supplied to a script.
+$*  All the arguments are double quoted. If a script receives two arguments, $* is equivalent to $1 $2.
+$@  All the arguments are individually double quoted. If a script receives two arguments, $@ is equivalent to $1 $2.
+$?  The exit status of the last command executed.
+$$  The process number of the current shell. For shell scripts, this is the process ID under which they are executing.
+$!  The process number of the last background command.
+
+For TOKEN in $*
+do
+   Echo $TOKEN
+done
+
+-b file. > check the file is a block special file or not
+-c file > checks the file is a character special file or not
+-d file > checks of the file is a directory or not
+-f file >checks whether the file is present or not
+-g file > checks if the file has a set group ID
+-k file > checks if the files its sticky bit
+-p file > checks if the files a named pipe
+-e >used to execute special/escaped character 
+  
+
+1. For loop
+#!/bin/bash
+for var in 1 2 3 4 5
+do 
+echo $var
+done
+
+for ach in $( seq 1 20 )
+do 
+  echo "welcome to shell scripting"
+done
+ 
+2. While loop
+#!/bin/bash
+while command
+do
+  statement
+done
+
+EXAMPLE:
+a=0
+while [ $a -lt 10  ] 
+do
+   echo $a
+   a= ‘expr $a +1’
+done
+
+3. NESTED LOOP
+#!/bin/bash
+a=0
+while [ $a -lt 10  ]  # loop1  
+do
+      b=$a 
+    while [ $b -ge 0  ] 
+      do
+         echo -n “$b”
+         b= ‘expr $b - 1’
+     done
+   a= ‘expr $a +1’
+done
+
+4. BREAK STATMENT
+#!/bin/bash
+a=0
+while [ $a -lt 10  ] 
+  do
+     echo $a 
+   If [ $a -eq 5 ]
+     then
+     break
+  fi
+     a= ‘expr $a +1’
+done
+
+5. CONTINUE STATMENT
+#!/bin/bash
+NUMS=“1 2 3 4 5 6 7”
+for  NUM in $NUMS
+do
+  q= 'expr $NUM %2 '
+if [ $q  -q 0 ]
+   then
+   echo “number is even” 
+  fi
+  echo ”found odd number”
+done
+
+#SHELL FUNCTIONS
+
+6. Define function
+#!/bin/bash
+Hello() {
+    echo “ Hello $1 $2 “
+    return 10
+}
+#Invoke function
+Hello Soju George
+
+#capture the value returned previously
+ret=$?
+echo  “returned value is $ret”
+
+7. SUPERSET FUNCTION
+#!/bin/bash
+number_one()
+{
+   echo “one online”
+   number_two
+}
+number_two() 
+{
+   echo “two online”
+}
+   number_one
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+8. How to store output of a command into a variable or into a file ?
+#!/bin/bash
+x=45
+echo " value of x is : $x "
+my_ls_value=$(ls)
+echo "value of ls is : $my_ls_value "
+ls > text.txt
+
+todays_date = $( date + "%Y-%d-%m" )
+logs_file=${todays_date}.log
+
+touch $logs_file
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+9. Echo command
+#!/bin/bash
+echo[Options] string/$variable/$(command) 
+
+-n > option is used to omit or add trailing nre line
+echo -n "$(ls)"
+echo "$(pwd)"
+
+-e >used to execute special/escaped character 
+     \n < to create a new line from where its been used
+        echo -e "first \nsecond"
+     \r > to emove one space back frm where ts been used 
+
+echo -e "\033[92mThis is a color"
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+10. Input and Output commands of a shell scripting
+#!/bin/bash
+status= $(systemctl status httpd | awk 'NR==3 {print $2}')
+echo "$the status of httpd is :$status"
+or
+echo -e "$the status of httpd is : \033[92m$status\033[0m"
+   
+##ANOTHER WAY
+
+read -p "enter your webserver :" web_server
+status= $(systemctl status $web_server | awk 'NR==3 {print $2}')
+echo "$the status of $web_server is :$status"
+or
+echo -e "$the status of $web_server is : \033[92m$status\033[0m"
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+11. Providing input for shell script with command line arguments
+#!/bin/bash
+read -p "enter a:" a
+read -p "enter b:" b
+
+result= 'expr "$a + $b" | bc'
+echo "the result of $a & $b is : $result"
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+12. Decision Control statements of Shell Scripting
+#!/bin/bash
+cmd_ars= $#
+if [ $cmd_ars -eq 2 ]
+then
+  x=$1
+  y=$2
+  result= ((x+y))
+  echo "the addition of $x and $y is : $result"
+fi
+
+#!/bin/bash
+read -p "enter start or stop to perform" action
+if [ {$action} = start ]
+then
+  echo"starting httpd"
+  sudo systemctl start httpd
+  sudo systemctl status httpd | awk 'NR==3 {print $2}'
+  echo"httpd is started"
+fi
+
+if [ {$action} = stop ]
+then
+  echo"starting httpd"
+  sudo systemctl start httpd
+  sudo systemctl status httpd | awk 'NR==3 {print $2}'
+  echo"httpd is started"
+fi
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+13. Select loop
+#!/bin/bash
+select opt in addition subsraction
+do
+  case $opt in
+    addition)
+    read -p "Enter num1:" num1
+    read -p "Enter num2:" num2
+    echo "the number additon of $num1 & $num2 is: $((num1+num2))"
+    ;;
+    subsraction)
+    read -p "Enter num1:" num1
+    read -p "Enter num2:" num2
+    echo "the number additon of $num1 & $num2 is: $((num1-num2))"
+    ;;
+  *)
+  quit)
+  echo "THANKS" 
+  exit 0
+  ;;
+esac
+done
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+14. loop contorl statements  ( BREAK AND CONTINUE)
+#!/bin/bash
+i=1
+while true
+do
+  echo $i
+  if [ i -eq 2]
+  then 
+    break
+  fi
+  i=$((i+1))
+done
+
+#!/bin/bash
+for each in 2 3 43 41 23
+do 
+  if [ $each -eq 41]
+  then
+    continue
+  fi
+  echo $each
+done
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+15. Guess My Number Game with Shell Scripting 
+#!/bin/bash
+system_number= $RANDOM
+
+for each in 1 2 3
+do
+  read -p "the chances of $each reading number: " user_number
+  if [ $user_number -eq $system_number]
+    then
+      echo "guess is correct"
+    else
+      echo "guess is wrong"
+  fi 
+done
+
+#!/bin/bash
+system_number= $RANDOM
+no_of_chances=1
+for (( ;; ))
+do
+  read -p "the chances of $each reading number: " user_number
+  if [ $user_number -eq $system_number]
+    then
+      echo "guess is correct"
+      echo "you guessed with $no_of_chances"
+      break
+    else
+      echo "guess is wrong"
+    if [ $user_number -ge $system_number]
+    then
+      echo "guess is correct"
+      echo "give less that $user_number"
+    else
+      echo "give higher that $user_number"
+    fi
+  fi 
+  no_of_chances=$((no_of_chances + 1))
+done
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+16. Shell Script to Send Email Alert When Memory Gets Low
+https://www.youtube.com/watch?v=lPG-caKSJS0 > for installing the mail service in ubuntu system
+
+#!/bin/bash
+TO="sojugeorgek@gmail.com"
+ram_free=$(free -mt | grep -i Total: awk '{print $4}')
+while : # use to run in backgorund for continously checking the memory rather than shceduling as a cron job
+do
+if ($ram_free -le 700)
+then
+  echo "ending mail because memory is less"
+  echo "subject: Due to memory issue is LOW" | sendmail $TO
+fi
+done
+
+crontab -e 
+# add the cron tab conditon with the file name and location of the script
+run.sh > ./location/script.sh
+
+$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$
+
+17. Automate Server Inventory using Shell Script
+
+server_name=$(uname -n)
+IP_address= &(ifconfig| grep inet |awk 'NR==1{print $2}')
+OS_TYPE=$(uname)
+UP_TIME=$(uptime| awk '{print $1}')
+
+echo "S_NO,server_name,IP_address,OS_TYPE,UP_TIME" > test.csv
+
+
+
+18. Automate Servers Inventory using Shell Script
+Inventory.sh list_of_servers remotepass remote users
